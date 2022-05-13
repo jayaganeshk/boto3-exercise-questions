@@ -14,6 +14,8 @@ def main():
     if queueURL:
         readMessage(queueURL)
 
+    # delete messages
+
     # for receiptHandle in receiptHandles:
     #     deleteMessage(queueURL, receiptHandle)
 

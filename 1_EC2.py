@@ -16,9 +16,11 @@ def main():
         "web3",
     ]
 
-    amiID = "ami-0022f774911c1d690"
+    amiID = "ami-0022f774911c1d690"  # Amazon Linux 2
     keyPairName = 'test'
+    # change this to your subnet ID
     subnetID = "subnet-0caf3a64479da1cba"
+    # change this to your security group ID
     securityGroupID = "sg-0f386be704283d1fa"
 
     instanceIDs = []
@@ -86,10 +88,6 @@ def createInstance(instanceName, amiID, keyName, subnetID, securityGroupID):
             MinCount=1,
             MaxCount=1,
             InstanceType="t2.micro",
-            # SubnetId=subnetID,
-            # SecurityGroupIds=[
-            #     securityGroupID,
-            # ],
             KeyName=keyName,
             TagSpecifications=[
                 {
@@ -120,7 +118,6 @@ def createInstance(instanceName, amiID, keyName, subnetID, securityGroupID):
                     securityGroupID,
                 ]
             }]
-            # DryRun=True,
         )
         instanceID = createInstanceResponse[0].id
         return instanceID

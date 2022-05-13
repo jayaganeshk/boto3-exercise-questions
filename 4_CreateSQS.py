@@ -57,10 +57,8 @@ def sendMessage(queueURL, message):
             MessageBody=(
                 message
             ),
-            # MessageDeduplicationId='',
             MessageGroupId=str(datetime.datetime.now().timestamp()),
         )
-        # print(response)
         if response['ResponseMetadata']['HTTPStatusCode'] == 200:
             print("Message Sent Successfully.")
         else:
