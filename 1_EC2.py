@@ -1,3 +1,8 @@
+'''
+Write a script that builds three 512 MB EC2 Instances that following a similar naming convention. 
+(ie., web1, web2, web3) and returns the IP of each instance. Use any image you want
+'''
+
 import time
 import boto3
 ec2 = boto3.client('ec2')

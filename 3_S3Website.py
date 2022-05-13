@@ -1,11 +1,19 @@
+
+'''
+Write a script that creates a public S3 website bucket. 
+Must have the following: 1.index file 2.error file 3.return the status code of a curl test.
+'''
 import boto3
 import os
 import json
+import requests
+
 s3 = boto3.client('s3')
+s3Resource = boto3.resource('s3')
 
 
 def main():
-    bucket = "jayaganeshtestwebbucket"
+    bucket = "jayaganeshtestwebbucket0"
 
     existingBukcet = BucketExists(bucket)
     if existingBukcet == False:
@@ -16,6 +24,8 @@ def main():
     makeObjectsPublic(bucket)
 
     enableStaticWebsite(bucket)
+
+    websiteStatus(bucket)
 
 
 def BucketExists(bucket):
@@ -57,6 +67,13 @@ def uploadFiles(bucket, directory):
                 s3.upload_file(
                     filePath, bucket, fileName, ExtraArgs={
                         'ContentType': 'text/html'})
+                # data = open(filePath)
+                # s3.put_object(
+                #     Body=data,
+                #     Bucket=bucket,
+                #     ContentType='text/html',
+                #     Key=fileName
+                # )
                 print("Uploaded: ", filePath)
             except Exception as e:
                 print("File Upload Failed." + str(e))
@@ -101,7 +118,7 @@ def enableStaticWebsite(bucket):
                 }
             },
         )
-        print(staticWebsite)
+        # print(staticWebsite)
         if staticWebsite['ResponseMetadata']['HTTPStatusCode'] == 200:
             print("Static Website Enabled Successfully.")
             return True
@@ -111,6 +128,18 @@ def enableStaticWebsite(bucket):
     except Exception as e:
         print("Static Website Creation Failed.")
         return False
+
+
+def websiteStatus(bucket):
+    try:
+        r = requests.get(
+            'http://'+bucket+'.s3-website-us-east-1.amazonaws.com')
+        if r.status_code == 200:
+            print("Website Status Code: " + str(r.status_code))
+        else:
+            print("Website is not Live.")
+    except Exception as e:
+        print("Website is not Live.")
 
 
 if __name__ == "__main__":
