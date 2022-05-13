@@ -6,24 +6,42 @@ The script should handle errors appropriately. (Check for invalid paths, etc.)
 
 import boto3
 import os
+import sys
+
 s3 = boto3.client('s3')
 
 
 def main():
-    directory = input("Enter Directory Path: ")
-    bucket = input("Enter Bucket Name: ")
+    if len(sys.argv) == 1:
+        directory = input("Enter Directory Path: ")
+        bucket = input("Enter Bucket Name: ")
+    else:
+        directory = sys.argv[1]
+        bucket = sys.argv[2]
+
+    print("Directory: ", directory)
+    print("Bucket: ", bucket)
+    print("\n")
     isValidDir = os.path.isdir(directory)
 
     if isValidDir != True:
         print("Invalid Directory.")
         return False
 
+    existingBukcet = BucketExists(bucket)
+
+    if existingBukcet == False:
+        createBucket(bucket)
+
+    uploadFile(bucket, directory)
+
+
+def BucketExists(bucket):
     try:
         s3.head_bucket(Bucket=bucket)
+        return True
     except Exception as e:
-        print("Bucket Doesnt Exists.")
-        createBucket(bucket)
-    uploadFile(bucket, directory)
+        return False
 
 
 def createBucket(bucket):
