@@ -9,7 +9,7 @@ receiptHandles = []
 
 
 def main():
-    queueName = "jayaganeshtestqueue0.fifo"
+    queueName = "jayaganeshtestqueue1.fifo"
     queueURL = getQueueURL(queueName)
     if queueURL:
         readMessage(queueURL)

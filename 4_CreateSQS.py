@@ -9,7 +9,7 @@ sqs = boto3.client('sqs')
 
 
 def main():
-    queueName = "jayaganeshtestqueue0.fifo"
+    queueName = "jayaganeshtestqueue1.fifo"
     queueURL = getQueueURL(queueName)
     if queueURL == False:
         queueURL = createQueue(queueName)

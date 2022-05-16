@@ -58,7 +58,7 @@ def createKeyPair(keyName):
         createKeyPairResponse = ec2.create_key_pair(
             KeyName=keyName
         )
-        print(createKeyPairResponse)
+        # print(createKeyPairResponse)
         with open(keyName + ".pem", "w") as f:
             f.write(createKeyPairResponse["KeyMaterial"])
     except Exception as e:

@@ -13,7 +13,7 @@ s3Resource = boto3.resource('s3')
 
 
 def main():
-    bucket = "jayaganeshtestwebbucket0"
+    bucket = "jayaganeshtestwebsitebuckettest123"
 
     existingBukcet = BucketExists(bucket)
     if existingBukcet == False:

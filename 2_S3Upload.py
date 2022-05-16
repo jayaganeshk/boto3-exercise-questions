@@ -2,6 +2,8 @@
 Write a script that accepts a directory as an argument as well as a S3 bucket name. 
 The script should upload the contents of the specified directory to the S3 Bucket (or create it if it doesn't exist). 
 The script should handle errors appropriately. (Check for invalid paths, etc.)
+
+python .\2_S3Upload.py .\test jayaganeshtes00
 '''
 
 import boto3
